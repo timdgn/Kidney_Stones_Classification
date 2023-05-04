@@ -4,6 +4,8 @@ from sklearn.metrics import accuracy_score, confusion_matrix, auc, roc_curve, f1
 import matplotlib.pyplot as plt
 import seaborn as sns
 from eda_reports import *
+import pickle
+import datetime
 
 
 def plot_roc_auc(fpr, tpr, auc_score):
@@ -119,6 +121,11 @@ def xgb_predict(X_train, y_train, X_test):
     # Predict with the xgb model
     y_pred = model.predict(X_test)
 
+    # Save the model in the "models" directory
+    now = datetime.datetime.now()
+    filename = f"xgb_model_{now.strftime('%Y-%m-%d_%H-%M-%S')}.pkl"
+    pickle.dump(model, open(f"{models_folder}/{filename}", "wb"))
+
     return y_pred
 
 
@@ -168,6 +175,7 @@ if __name__ == "__main__":
     root = cwd.parent
     data_folder = f"{root}/data"
     docs_folder = f"{root}/docs"
+    models_folder = f"{root}/models"
 
     # Train/test split
     train_df = pd.read_csv(f"{data_folder}/train.csv")
