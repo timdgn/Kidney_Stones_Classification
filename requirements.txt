@@ -24,6 +24,7 @@ dataprep==0.4.5
 debugpy==1.6.7
 decorator==5.1.1
 defusedxml==0.7.1
+exceptiongroup==1.1.1
 executing==0.8.3
 fastjsonschema==2.16.3
 Flask==2.2.5
@@ -35,6 +36,7 @@ fsspec==2023.4.0
 idna==3.4
 importlib-metadata==6.6.0
 importlib-resources==5.12.0
+iniconfig==2.0.0
 ipykernel==6.22.0
 ipython==8.13.2
 ipython-genutils==0.2.0
@@ -80,6 +82,7 @@ pexpect==4.8.0
 pickleshare==0.7.5
 Pillow==9.5.0
 platformdirs==3.5.0
+pluggy==1.0.0
 ply==3.11
 prometheus-client==0.16.0
 prompt-toolkit==3.0.38
@@ -92,6 +95,7 @@ pydot==1.4.2
 Pygments==2.15.1
 pyparsing==3.0.9
 pyrsistent==0.19.3
+pytest==7.3.1
 python-crfsuite==0.9.8
 python-dateutil==2.8.2
 python-json-logger==2.0.7
@@ -116,6 +120,7 @@ sweetviz==2.1.4
 terminado==0.17.1
 threadpoolctl==3.1.0
 tinycss2==1.2.1
+tomli==2.0.1
 toolz==0.12.0
 tornado==6.3.1
 tqdm==4.65.0
