@@ -8,7 +8,43 @@ import pickle
 import datetime
 
 
-def plot_roc_auc(fpr, tpr, auc_score):
+def xgb_predict(X_train, y_train, X_test, output):
+    """
+    Trains and predicts a binary classifier using XGBoost.
+
+    Parameters
+    ----------
+    X_train : array-like
+        The features of the training set.
+    y_train : array-like
+        The labels of the training set.
+    X_test : array-like
+        The features of the test set.
+    output : str
+        The output folder where the model is saved.
+
+    Returns
+    -------
+    y_pred : array-like
+        The predicted labels of the test set.
+    """
+
+    # Create the model and fit it
+    model = XGBClassifier()
+    model.fit(X_train, y_train)
+
+    # Predict with the xgb model
+    y_pred = model.predict(X_test)
+
+    # Save the model in the "models" directory
+    now = datetime.datetime.now()
+    filename = f"xgb_model_{now.strftime('%Y-%m-%d_%H-%M-%S')}.pkl"
+    pickle.dump(model, open(f"{output}/{filename}", "wb"))
+
+    return y_pred
+
+
+def plot_roc_auc(fpr, tpr, auc_score, output):
     """
     Plots the ROC curve and the AUC score.
 
@@ -20,6 +56,8 @@ def plot_roc_auc(fpr, tpr, auc_score):
         The true positive rate values for different thresholds.
     auc_score : float
         The area under the ROC curve.
+    output : str
+        The output folder where the plot is saved.
 
     Returns
     -------
@@ -49,14 +87,16 @@ def plot_roc_auc(fpr, tpr, auc_score):
     plt.ylabel("True positive rate")
 
     # Save the plot as an image
-    plt.savefig(f"{docs_folder}/ROC AUC Curve.png", dpi=300)
+    now = datetime.datetime.now()
+    filename = f"ROC-AUC-Curve_{now.strftime('%Y-%m-%d_%H-%M-%S')}.png"
+    plt.savefig(f"{output}/{filename}", dpi=300)
 
     # Show the legend and the plot
     plt.legend()
     plt.show()
 
 
-def plot_confusion_matrix(y_test, y_pred):
+def plot_confusion_matrix(y_test, y_pred, output):
     """
     Plots the confusion matrix.
 
@@ -66,6 +106,8 @@ def plot_confusion_matrix(y_test, y_pred):
         The true labels of the test set.
     y_pred : array-like
         The predicted labels of the test set.
+    output : str
+        The output folder where the plot is saved.
 
     Returns
     -------
@@ -89,47 +131,15 @@ def plot_confusion_matrix(y_test, y_pred):
     plt.ylabel("True label")
 
     # Save the plot as an image
-    plt.savefig(f"{docs_folder}/Confusion Matrix.png", dpi=300)
+    now = datetime.datetime.now()
+    filename = f"Confusion-Matrix_{now.strftime('%Y-%m-%d_%H-%M-%S')}.png"
+    plt.savefig(f"{output}/{filename}", dpi=300)
 
     # Showing the plot
     plt.show()
 
 
-def xgb_predict(X_train, y_train, X_test):
-    """
-    Trains and predicts a binary classifier using XGBoost.
-
-    Parameters
-    ----------
-    X_train : array-like
-        The features of the training set.
-    y_train : array-like
-        The labels of the training set.
-    X_test : array-like
-        The features of the test set.
-
-    Returns
-    -------
-    y_pred : array-like
-        The predicted labels of the test set.
-    """
-
-    # Create the model and fit it
-    model = XGBClassifier()
-    model.fit(X_train, y_train)
-
-    # Predict with the xgb model
-    y_pred = model.predict(X_test)
-
-    # Save the model in the "models" directory
-    now = datetime.datetime.now()
-    filename = f"xgb_model_{now.strftime('%Y-%m-%d_%H-%M-%S')}.pkl"
-    pickle.dump(model, open(f"{models_folder}/{filename}", "wb"))
-
-    return y_pred
-
-
-def evaluate_model(y_test, y_pred):
+def evaluate_model(y_test, y_pred, output):
     """
     Evaluates the performance of the binary classifier using Accuracy, F1 and AUC scores.
 
@@ -139,6 +149,8 @@ def evaluate_model(y_test, y_pred):
         The true labels of the test set.
     y_pred : array-like
         The predicted labels of the test set.
+    output : str
+        The output folder where the plots are saved.
 
     Returns
     -------
@@ -163,12 +175,20 @@ def evaluate_model(y_test, y_pred):
     auc_score = auc(fpr, tpr)
     print(f"AUC score: {auc_score}")
 
-    plot_confusion_matrix(y_test, y_pred)
+    plot_confusion_matrix(y_test, y_pred, output)
 
-    plot_roc_auc(fpr, tpr, auc_score)
+    plot_roc_auc(fpr, tpr, auc_score, output)
 
 
 if __name__ == "__main__":
+    """
+    This function performs the following steps:
+    - Creates paths for the data, docs and models folders
+    - Loads the train data and splits it into train and test sets
+    - Predicts the target variable using the xgb_predict function
+    - Evaluates the model performance using the evaluate_model function
+    - Prints a success message
+    """
 
     # Path creation
     cwd = Path.cwd()
@@ -184,9 +204,9 @@ if __name__ == "__main__":
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=69)
 
     # Predict with the xgb model
-    y_pred = xgb_predict(X_train, y_train, X_test)
+    y_pred = xgb_predict(X_train, y_train, X_test, models_folder)
 
     # Evaluate the results
-    evaluate_model(y_test, y_pred)
+    evaluate_model(y_test, y_pred, docs_folder)
 
     print("Finished ✅")
