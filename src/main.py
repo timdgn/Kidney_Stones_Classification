@@ -175,9 +175,11 @@ def evaluate_model(y_test, y_pred, output):
     auc_score = auc(fpr, tpr)
     print(f"AUC score: {auc_score}")
 
-    plot_confusion_matrix(y_test, y_pred, output)
+    conf_folder = f"{output}/confusion_matrix"
+    plot_confusion_matrix(y_test, y_pred, conf_folder)
 
-    plot_roc_auc(fpr, tpr, auc_score, output)
+    roc_auc_folder = f"{output}/roc_auc"
+    plot_roc_auc(fpr, tpr, auc_score, roc_auc_folder)
 
 
 if __name__ == "__main__":
@@ -199,7 +201,7 @@ if __name__ == "__main__":
 
     # Train/test split
     train_df = pd.read_csv(f"{data_folder}/train.csv")
-    X = train_df.drop("target", axis=1)
+    X = train_df.drop(["id", "target"], axis=1)
     y = train_df["target"]
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=69)
 
