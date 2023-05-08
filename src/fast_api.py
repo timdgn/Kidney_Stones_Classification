@@ -1,5 +1,8 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+import sys
+
+sys.path.append('')
 from inference import inference
 
 
@@ -15,7 +18,10 @@ class UserInput(BaseModel):
 app = FastAPI()
 
 
-@app.post("/inference")
+@app.post("/myapp")
 def get_results(input: UserInput):
     result = inference(input.gravity, input.ph, input.osmo, input.cond, input.urea, input.calc)
-    return result
+    if result == 0:
+        return "No kidney Stones ✅"
+    else:
+        return "There are kidney stone 🫨"
