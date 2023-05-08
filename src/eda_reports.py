@@ -3,6 +3,7 @@ from pathlib import Path
 import datetime
 from dataprep.eda import create_report
 import sweetviz
+import datetime
 
 
 def dataprep_report(df, output_path, name):
@@ -95,13 +96,13 @@ if __name__ == "__main__":
     cwd = Path.cwd()
     root = cwd.parent
     data_folder = f"{root}/data"
-    docs_folder = f"{root}/docs"
+    reports_folder = f"{root}/docs/reports"
     train_csv = f"{data_folder}/train.csv"
 
     # Train & test dataframes
     train_df = pd.read_csv(train_csv)
 
     # Generate a dataprep and a sweetviz report
-    reports(train_df, docs_folder)
+    reports(train_df, reports_folder)
 
     print("Finished ✅")
