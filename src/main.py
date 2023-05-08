@@ -1,9 +1,10 @@
+from pathlib import Path
+import pandas as pd
 from xgboost import XGBClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, confusion_matrix, auc, roc_curve, f1_score
 import matplotlib.pyplot as plt
 import seaborn as sns
-from eda_reports import *
 import pickle
 import datetime
 
@@ -27,6 +28,9 @@ def xgb_predict(X_train, y_train, X_test, output):
     -------
     y_pred : array-like
         The predicted labels of the test set.
+    filename : str
+        The filename of the saved model
+
     """
 
     # Create the model and fit it
@@ -41,7 +45,7 @@ def xgb_predict(X_train, y_train, X_test, output):
     filename = f"xgb_model_{now.strftime('%Y-%m-%d_%H-%M-%S')}.pkl"
     pickle.dump(model, open(f"{output}/{filename}", "wb"))
 
-    return y_pred
+    return y_pred, filename
 
 
 def plot_roc_auc(fpr, tpr, auc_score, output):
@@ -193,8 +197,7 @@ if __name__ == "__main__":
     """
 
     # Path creation
-    cwd = Path.cwd()
-    root = cwd.parent
+    root = Path.cwd().parent
     data_folder = f"{root}/data"
     docs_folder = f"{root}/docs"
     models_folder = f"{root}/models"
@@ -206,7 +209,7 @@ if __name__ == "__main__":
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=69)
 
     # Predict with the xgb model
-    y_pred = xgb_predict(X_train, y_train, X_test, models_folder)
+    y_pred, _ = xgb_predict(X_train, y_train, X_test, models_folder)
 
     # Evaluate the results
     evaluate_model(y_test, y_pred, docs_folder)
