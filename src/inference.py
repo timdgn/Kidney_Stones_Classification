@@ -1,18 +1,17 @@
 import pickle
 import numpy as np
-from pathlib import Path
 import os
+from pathlib import Path
 import glob
 
 
-def inference(gravity, ph, osmo, cond, urea, calc):
-    # Path creation
-    cwd = Path.cwd()
-    root = cwd.parent
-    models_folder = f"{root}/models"
+# Define a global variable for the models folder path
+MODELS_FOLDER = Path("models") if __name__ != "__main__" else Path(__file__).parent.parent / "models"
 
+
+def load_model():
     # Get the list of files in the folder that match the pattern
-    files = glob.glob(f"{models_folder}/*.pkl")
+    files = glob.glob(f"{MODELS_FOLDER}/*.pkl")
 
     # Sort the files by their modification time in descending order
     files.sort(key=os.path.getmtime, reverse=True)
@@ -24,8 +23,14 @@ def inference(gravity, ph, osmo, cond, urea, calc):
     with open(last_file, "rb") as f:
         model = pickle.load(f)
 
-    # Define the input features for inference as a numpy array
-    # You should modify this according to your data format and feature names
+    return model
+
+
+def inference(gravity, ph, osmo, cond, urea, calc):
+    # Load the model
+    model = load_model()
+
+    # Define the input features for inference
     input_data = np.array([gravity, ph, osmo, cond, urea, calc])
 
     # Make predictions
@@ -35,4 +40,5 @@ def inference(gravity, ph, osmo, cond, urea, calc):
 
 
 if __name__ == "__main__":
+
     print(inference(1.013, 6.19, 443, 14.8, 124, 1.45))
