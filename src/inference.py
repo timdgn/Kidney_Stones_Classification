@@ -9,8 +9,6 @@ def inference(gravity, ph, osmo, cond, urea, calc):
     # Path creation
     cwd = Path.cwd()
     root = cwd.parent
-    data_folder = f"{root}/data"
-    docs_folder = f"{root}/docs"
     models_folder = f"{root}/models"
 
     # Get the list of files in the folder that match the pattern
@@ -33,10 +31,7 @@ def inference(gravity, ph, osmo, cond, urea, calc):
     # Make predictions
     predictions = model.predict(input_data.reshape(1, -1))
 
-    if predictions == 0:
-        return "No kidney Stones ✅"
-    else:
-        return "There are kidney stone 🫨"
+    return predictions[0]
 
 
 if __name__ == "__main__":
