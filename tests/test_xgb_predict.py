@@ -2,7 +2,7 @@ import os
 import pytest
 import numpy as np
 from pathlib import Path
-from ..src.main import xgb_predict
+from ..FastAPI_Backend.src.main import xgb_predict
 
 
 # Define a fixture to generate some synthetic data
@@ -18,7 +18,7 @@ def data():
 def test_xgb_predict(data):
     # Call the function and get the predictions
     X_train, y_train, X_test = data
-    models_folder = str(Path(__file__).parent.parent / "models")
+    models_folder = str(Path(__file__).parent.parent / "FastAPI_Backend/models")
     y_pred, model_name = xgb_predict(X_train, y_train, X_test, models_folder)
 
     # Check that the predictions are binary
