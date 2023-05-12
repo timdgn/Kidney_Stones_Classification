@@ -11,7 +11,7 @@ The project aims to use several tool such as Python, Pandas, Numpy, Scikit-learn
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [Progress status](#progress_status)
+- [Progress status](#progress%20status)
 
 ## Installation
 To install and run this project on your local machine, follow these steps:
