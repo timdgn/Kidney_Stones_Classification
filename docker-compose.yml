@@ -1,0 +1,19 @@
+version: "3.9"
+name: kidney_stone_app # compose stack custom name
+
+services:
+  streamlit_service:
+    build: ./Streamlit_Frontend # path to your streamlit app directory
+    image: streamlit_image # custom image name
+    container_name: streamlit_container # custom container name
+    ports:
+      - "8501:8501" # expose port 8501
+    depends_on:
+      - fastapi_service # make sure fastapi service is running before streamlit
+
+  fastapi_service:
+    build: ./FastAPI_Backend # path to your fastapi app directory
+    image: fastapi_image # custom image name
+    container_name: fastapi_container # custom container name
+    ports:
+      - "8000:8000" # expose port 8000
