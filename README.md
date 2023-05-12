@@ -10,7 +10,7 @@ The project aims to use several tool such as Python, Pandas, Numpy, Scikit-learn
 ## Table of Contents
 - [Installation](#installation)
 - [Usage](#usage)
-- [Progress status](#progress)
+- [Progress status](#progress-status)
 - [Contributing](#contributing)
 
 ## Installation
