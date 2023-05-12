@@ -32,7 +32,7 @@ inputs = {"gravity": gravity,
 
 # when the user clicks on button it will fetch the API
 if st.button('Click to diagnose 👨‍⚕️'):
-    response = requests.post(url="http://127.0.0.1:8000/myapp",
+    response = requests.post(url="http://fastapi_service:8000/myapp",
                              data=json.dumps(inputs))
     if response.status_code == 200:
         st.subheader(response.text[1:-1])
