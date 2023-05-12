@@ -1,12 +1,13 @@
 from pathlib import Path
+import datetime
+import pickle
+
 import pandas as pd
-from xgboost import XGBClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, confusion_matrix, auc, roc_curve, f1_score
 import matplotlib.pyplot as plt
 import seaborn as sns
-import pickle
-import datetime
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, confusion_matrix, auc, roc_curve, f1_score
+from xgboost import XGBClassifier
 
 
 def xgb_predict(X_train, y_train, X_test, output):
@@ -186,7 +187,7 @@ def evaluate_model(y_test, y_pred, output):
     plot_roc_auc(fpr, tpr, auc_score, roc_auc_folder)
 
 
-if __name__ == "__main__":
+def main():
     """
     This function performs the following steps:
     - Creates paths for the data, docs and models folders
@@ -197,10 +198,10 @@ if __name__ == "__main__":
     """
 
     # Path creation
-    root = Path.cwd().parent
-    data_folder = f"{root}/data"
-    docs_folder = f"{root}/docs"
-    models_folder = f"{root}/models"
+    parent = Path.cwd().parent
+    data_folder = parent.joinpath("data")
+    docs_folder = parent.joinpath("docs")
+    models_folder = parent.joinpath("models")
 
     # Train/test split
     train_df = pd.read_csv(f"{data_folder}/train.csv")
@@ -209,9 +210,13 @@ if __name__ == "__main__":
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=69)
 
     # Predict with the xgb model
-    y_pred, _ = xgb_predict(X_train, y_train, X_test, models_folder)
+    y_pred, _ = xgb_predict(X_train, y_train, X_test, str(models_folder))
 
-    # Evaluate the results
-    evaluate_model(y_test, y_pred, docs_folder)
+    # Evaluate the results and saves plots the confusion matrix and ROC AUC curves.
+    evaluate_model(y_test, y_pred, str(docs_folder))
 
     print("Finished ✅")
+
+
+if __name__ == "__main__":
+    main()
