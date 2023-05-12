@@ -10,8 +10,8 @@ The project aims to use several tool such as Python, Pandas, Numpy, Scikit-learn
 ## Table of Contents
 - [Installation](#installation)
 - [Usage](#usage)
-- [Contributing](#contributing)
 - [Progress status](#progress)
+- [Contributing](#contributing)
 
 ## Installation
 To install and run this project on your local machine, follow these steps:
@@ -26,7 +26,7 @@ To install and run this project on your local machine, follow these steps:
 1. Use the different sliders to simulate a patient's urine details.
 2. Click the button at the bottom to diagnose the patient using a Machine Learning model 👨‍⚕️
 
-## Progress
+## Progress status
 ✅ EDA
 ✅ Building and evaluation of the ML model
 ✅ Deployment with Docker
