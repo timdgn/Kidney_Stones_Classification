@@ -27,11 +27,11 @@ To install and run this project on your local machine, follow these steps:
 2. Click the button at the bottom to diagnose the patient using a Machine Learning model 👨‍⚕️
 
 ## Progress status
-✅ EDA
-✅ Building and evaluation of the ML model
-✅ Deployment with Docker
-🚧 Integration with AWS S3 & EC2
-🚧 ...
+- ✅ EDA
+- ✅ Building and evaluation of the ML model
+- ✅ Deployment with Docker
+- 🚧 Integration with AWS S3 & EC2
+- 🚧 ...
 
 ## Contributing
 Me & Myself
