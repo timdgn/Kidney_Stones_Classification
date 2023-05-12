@@ -1,9 +1,9 @@
-import pandas as pd
 from pathlib import Path
 import datetime
-from dataprep.eda import create_report
+
+import pandas as pd
 import sweetviz
-import datetime
+from dataprep.eda import create_report
 
 
 def dataprep_report(df, output_path, name):
@@ -56,7 +56,7 @@ def sweetviz_report(df, output_path, name):
     """
 
     # Create the report
-    report = sweetviz.analyze([df, name])
+    report = sweetviz.analyze((df, name))
 
     # See the report in the notebook
     # report.show_notebook()
@@ -86,23 +86,38 @@ def reports(df, output_path):
 
     # Generating reports
     report_name = "Train Report"
-    dataprep_report(df, output_path, "Dataprep "+report_name)
-    sweetviz_report(df, output_path, "Sweetviz "+report_name)
+    dataprep_report(df, output_path, "Dataprep " + report_name)
+    sweetviz_report(df, output_path, "Sweetviz " + report_name)
 
 
-if __name__ == "__main__":
+def main():
+    """
+    This function creates the paths for the reports and the train data, reads the train data as a pandas dataframe,
+    and generates two reports using the dataprep and sweetviz modules.
+
+    Parameters
+    ----------
+    # None
+
+    Returns
+    -------
+    None
+    """
 
     # Path creation
     cwd = Path.cwd()
-    root = cwd.parent
-    data_folder = f"{root}/data"
-    reports_folder = f"{root}/docs/reports"
-    train_csv = f"{data_folder}/train.csv"
+    parent = cwd.parent
+    reports_folder = parent.joinpath("docs", "reports")
+    train_csv = parent.joinpath("data", "train.csv")
 
     # Train & test dataframes
     train_df = pd.read_csv(train_csv)
 
     # Generate a dataprep and a sweetviz report
-    reports(train_df, reports_folder)
+    reports(train_df, str(reports_folder))
 
     print("Finished ✅")
+
+
+if __name__ == "__main__":
+    main()
