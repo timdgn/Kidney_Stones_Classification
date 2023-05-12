@@ -3,7 +3,7 @@ name: kidney_stone_app # compose stack custom name
 
 services:
   streamlit_service:
-    build: ./Streamlit_Frontend # path to your streamlit app directory
+    build: ./Streamlit_Frontend # path to the streamlit app directory
     image: streamlit_image # custom image name
     container_name: streamlit_container # custom container name
     ports:
@@ -12,7 +12,7 @@ services:
       - fastapi_service # make sure fastapi service is running before streamlit
 
   fastapi_service:
-    build: ./FastAPI_Backend # path to your fastapi app directory
+    build: ./FastAPI_Backend # path to the fastapi app directory
     image: fastapi_image # custom image name
     container_name: fastapi_container # custom container name
     ports:
