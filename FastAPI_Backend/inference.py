@@ -1,17 +1,12 @@
 import pickle
 import numpy as np
 import os
-from pathlib import Path
 import glob
-
-
-# Define a global variable for the models folder path
-MODELS_FOLDER = Path("models") if __name__ != "__main__" else Path(__file__).parent.parent / "models"
 
 
 def load_model():
     # Get the list of files in the folder that match the pattern
-    files = glob.glob(f"{MODELS_FOLDER}/*.pkl")
+    files = glob.glob("models/*.pkl")
 
     # Sort the files by their modification time in descending order
     files.sort(key=os.path.getmtime, reverse=True)
@@ -41,4 +36,5 @@ def inference(gravity, ph, osmo, cond, urea, calc):
 
 if __name__ == "__main__":
 
+    # Test the inference() fct to see if it gives a prediction
     print(inference(1.013, 6.19, 443, 14.8, 124, 1.45))
