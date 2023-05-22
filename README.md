@@ -20,7 +20,7 @@ To install and run this project on your local machine, follow these steps:
 2. Navigate to the project directory using `cd Kidney_Stones_Classification`.
 3. Install the required Python packages in your virtual environment using `pip3 install -r requirements.txt`.
 4. Build the Docker images and run detached containers using `docker-compose up -d --build`.
-5. Go to `http://localhost:8501` and test my app ✨
+5. Go to `http://localhost` and test my app ✨
 
 ## Usage
 1. Use the different sliders to simulate a patient's urine details.
