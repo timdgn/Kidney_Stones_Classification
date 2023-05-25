@@ -1,0 +1,32 @@
+{
+  "AWSEBDockerrunVersion": 3,
+  "containerDefinitions": [
+    {
+      "name": "ui",
+      "image": "{$AWS_ACCOUNT_ID}.dkr.ecr.{$AWS_DEFAULT_REGION}.amazonaws.com/kidney_frontend",
+      "hostname": "ui",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 8501
+        }
+      ],
+      "links": ["api"]
+    },
+    {
+      "name": "api",
+      "image": "{$AWS_ACCOUNT_ID}.dkr.ecr.{$AWS_DEFAULT_REGION}.amazonaws.com/kidney_backend",
+      "hostname": "api",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [
+        {
+          "hostPort": 8000,
+          "containerPort": 8000
+        }
+      ]
+    }
+  ]
+}
