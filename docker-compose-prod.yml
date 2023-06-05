@@ -7,7 +7,7 @@ services:
     image: ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/kidney_frontend # AWS ECR repo
     container_name: streamlit_container # custom container name
     ports:
-      - "80:8501" # expose port 8501
+      - "8501:8501" # expose port 8501
     depends_on:
       - fastapi_service # make sure fastapi service is running before streamlit
 
