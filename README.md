@@ -1,11 +1,11 @@
 # Kidney_Stones_Classification
 
 ## Description
-This is a personal project in which I build a CI/CD pipeline for a health classification problem.
+This is a personal project in which I build a CI/CD pipeline for a health classification Web App.
 The goal is to predict whether a patient has kidney stones or not based on their urine analysis results.
 
 I build this project to practice my skills in data science, machine learning, data engineering and MLOps 💪.
-The project aims to use several tool such as Python, Pandas, Numpy, Scikit-learn, FastAPI, Streamlit, Docker, DVC, MLEM, AWS S3/EC2 and GitHub Actions.
+The project aims to use several tools such as Python, Pandas, Numpy, Scikit-learn, FastAPI, Streamlit, Docker, GitHub and AWS ECR/ECS/EC2.
 
 ## Table of Contents
 - [Installation](#installation)
@@ -30,7 +30,7 @@ To install and run this project on your local machine, follow these steps:
 - ✅ EDA
 - ✅ Building and evaluation of the ML model
 - ✅ Deployment with Docker
-- 🚧 Integration with AWS S3 & EC2
+- ✅ Deployment on AWS
 - 🚧 ...
 
 ## Contributing
