@@ -2,10 +2,10 @@
 
 ## Description
 This is a personal project in which I build a CI/CD pipeline for a health classification Web App.
-The goal is to predict whether a patient has kidney stones or not based on their urine analysis results.
+The goal is to predict whether a patient has kidney stones or not based on their urine analysis results 🩺.
 
 I build this project to practice my skills in data science, machine learning, data engineering and MLOps 💪.
-The project aims to use several tools such as Python, Pandas, Numpy, Scikit-learn, FastAPI, Streamlit, Docker, GitHub and AWS ECR/ECS/EC2.
+The project aims to use several tools such as Python, Pandas, Numpy, Scikit-learn, FastAPI, Streamlit, Docker, GitHub and AWS ECR/ECS/EC2/Fargate.
 
 ## Table of Contents
 - [Installation](#installation)
@@ -13,13 +13,13 @@ The project aims to use several tools such as Python, Pandas, Numpy, Scikit-lear
 - [Progress status](#progress-status)
 - [Contributing](#contributing)
 
-## Installation
-To install and run this project on your local machine, follow these steps:
+## Local installation
+To install and run this project on your local machine, follow these steps :
 
-1. Clone this repository to your local machine using `git clone https://github.com/timdgn/Kidney_Stones_Classification.git`.
-2. Navigate to the project directory using `cd Kidney_Stones_Classification`.
-3. Install the required Python packages in your virtual environment using `pip3 install -r requirements.txt`.
-4. Build the Docker images and run detached containers using `docker-compose up -d --build`.
+1. Clone this repository to your local machine using `git clone https://github.com/timdgn/Kidney_Stones_Classification.git`
+2. Navigate to the project directory using `cd Kidney_Stones_Classification`
+3. (Optional) Install the required Python packages in your favorite virtual environment using `pip3 install -r requirements.txt`
+4. Build the Docker images and run detached containers using `docker-compose up -d --build`
 5. Go to `http://localhost` and test my app ✨
 
 ## Usage
@@ -29,9 +29,16 @@ To install and run this project on your local machine, follow these steps:
 ## Progress status
 - ✅ EDA
 - ✅ Building and evaluation of the ML model
-- ✅ Deployment with Docker
-- ✅ Deployment on AWS
+- ✅ Local deployment with Docker
+- ✅ Cloud deployment on AWS
+- 🚧 Building the Continuous Delivery pipeline
 - 🚧 ...
+
+## What's in my backend cloud deployment ?
+For my MLOps AWS deployment, the following pipeline is built 🔗 :
+1. Whenever a push/merge is done on the **GitHub** main branch, **AWS CodePipeline** is triggered.
+2. **CodeBuild** pulls the latest GitHub repository version, builds 2 **docker** images (one for the **fastapi** backend and one for the **streamlit** frontend) and pushes them to **ECR**.
+3. **CodeDeploy** pulls the two latest images from **ECR** and deploys them to **ECS Fargate**
 
 ## Contributing
 Me & Myself

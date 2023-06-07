@@ -1,3 +1,5 @@
+# This file is used by AWS CodeBuild (via buildspec.yml) to build the images
+
 version: "3.9"
 name: kidney_stone_app # compose stack custom name
 

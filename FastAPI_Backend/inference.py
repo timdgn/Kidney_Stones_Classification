@@ -5,6 +5,19 @@ import glob
 
 
 def load_model():
+    """
+    Loads the latest model file from the models folder
+
+    Parameters
+    ----------
+    None
+
+    Returns
+    -------
+    model : object
+        The model object loaded from the pickle file.
+    """
+
     # Get the list of files in the folder that match the pattern
     files = glob.glob("models/*.pkl")
 
@@ -22,6 +35,30 @@ def load_model():
 
 
 def inference(gravity, ph, osmo, cond, urea, calc):
+    """
+    Makes predictions on the input features using the loaded model.
+
+    Parameters
+    ----------
+    gravity : float
+        The specific gravity of the urine sample.
+    ph : float
+        The pH of the urine sample.
+    osmo : float
+        The osmolality of the urine sample.
+    cond : float
+        The conductivity of the urine sample.
+    urea : float
+        The urea concentration of the urine sample.
+    calc : float
+        The calcium concentration of the urine sample.
+
+    Returns
+    -------
+    predictions[0] : int
+        The predicted class label for the input features (0 for normal, 1 for abnormal)
+    """
+
     # Load the model
     model = load_model()
 

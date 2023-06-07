@@ -1,3 +1,5 @@
+# This file is used by AWS CodeBuild to build the images
+
 version: 0.2
 phases:
   pre_build:
