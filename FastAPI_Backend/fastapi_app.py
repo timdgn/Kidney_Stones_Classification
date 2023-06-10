@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from inference import inference
+from inference import *
 
 
 class UserInput(BaseModel):
@@ -11,6 +11,9 @@ class UserInput(BaseModel):
     urea: float
     calc: float
 
+
+# Load the model
+model = load_model()
 
 app = FastAPI()
 
@@ -30,7 +33,7 @@ def get_results(input: UserInput):
     str
         A string that says "No kidney stones ✅" if the result is 0, or "There are kidney stone 🫨" if the result is 1.
     """
-    result = inference(input.gravity, input.ph, input.osmo, input.cond, input.urea, input.calc)
+    result = inference(model, input.gravity, input.ph, input.osmo, input.cond, input.urea, input.calc)
     if result == 0:
         return "No kidney stones ✅"
     else:

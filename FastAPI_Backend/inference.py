@@ -34,12 +34,14 @@ def load_model():
     return model
 
 
-def inference(gravity, ph, osmo, cond, urea, calc):
+def inference(model, gravity, ph, osmo, cond, urea, calc):
     """
     Makes predictions on the input features using the loaded model.
 
     Parameters
     ----------
+    model : object
+        The loaded model from the pickle file.
     gravity : float
         The specific gravity of the urine sample.
     ph : float
@@ -59,9 +61,6 @@ def inference(gravity, ph, osmo, cond, urea, calc):
         The predicted class label for the input features (0 for normal, 1 for abnormal)
     """
 
-    # Load the model
-    model = load_model()
-
     # Define the input features for inference
     input_data = np.array([gravity, ph, osmo, cond, urea, calc])
 
@@ -73,5 +72,8 @@ def inference(gravity, ph, osmo, cond, urea, calc):
 
 if __name__ == "__main__":
 
+    # Load the model
+    model = load_model()
+
     # Test the inference() fct to see if it gives a prediction
-    print(inference(1.013, 6.19, 443, 14.8, 124, 1.45))
+    print(inference(model, 1.013, 6.19, 443, 14.8, 124, 1.45))
